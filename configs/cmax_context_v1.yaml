@@ -1,0 +1,63 @@
+# LM3 Cmax: maximal structured pre-ECG context (post hoc extension).
+# Concepts and itemids frozen from hosp/d_labitems.csv.gz (MIMIC-IV 3.1) before any
+# coverage count or outcome association was read. Blood-fluid dominant assays only;
+# urine/CSF/body-fluid duplicates excluded. Units are the dominant labevents valueuom
+# per concept; a row whose unit differs is not eligible for that concept.
+version: cmax_context_v1
+analysis_status: post_hoc_extension
+lookback_hours_primary: 24
+lookback_hours_secondary: 72
+temporal_buffers_hours: [0, 1, 2]
+primary_buffer_hours: 0
+coverage_gate:
+  min_fraction_of_dev: 0.02
+  min_patients: 1000
+  rule: retain concept only if qualified dev patients >= max(min_fraction_of_dev * n_dev, min_patients)
+predeclared_low_coverage: [trop_t_blood, trop_i_blood, ntprobnp_blood]
+icu_gate:
+  min_dev_patients: 2000
+  min_dev_events: 100
+  lookback_hours: 6
+winsorization:
+  low_percentile: 0.5
+  high_percentile: 99.5
+  learned_on: dev
+imputation: dev_median_after_winsorization
+time_since_feature:
+  enabled: true
+  cap_hours: 24
+concepts:
+  creatinine_blood: {itemids: [50912, 52546], unit: mg/dl, low: 0.2, high: 20.0}
+  bun_blood: {itemids: [51006, 52647], unit: mg/dl, low: 1.0, high: 300.0}
+  sodium_blood: {itemids: [50983, 52623], unit: meq/l, low: 100.0, high: 180.0}
+  potassium_blood: {itemids: [50971, 52610], unit: meq/l, low: 1.5, high: 9.0}
+  chloride_blood: {itemids: [50902, 52535], unit: meq/l, low: 70.0, high: 140.0}
+  bicarbonate_blood: {itemids: [50882, 51739], unit: meq/l, low: 2.0, high: 60.0}
+  glucose_blood: {itemids: [50931, 52569], unit: mg/dl, low: 15.0, high: 1500.0}
+  calcium_total_blood: {itemids: [50893], unit: mg/dl, low: 4.0, high: 20.0}
+  magnesium_blood: {itemids: [50960], unit: mg/dl, low: 0.3, high: 15.0}
+  phosphate_blood: {itemids: [50970], unit: mg/dl, low: 0.3, high: 25.0}
+  hemoglobin_blood: {itemids: [51222, 50811, 51640], unit: g/dl, low: 2.0, high: 25.0}
+  hematocrit_blood: {itemids: [51221, 51638, 51639, 52028], unit: "%", low: 5.0, high: 75.0}
+  wbc_blood: {itemids: [51301, 51300], unit: k/ul, low: 0.1, high: 300.0}
+  platelets_blood: {itemids: [51265, 53189], unit: k/ul, low: 2.0, high: 2000.0}
+  inr_blood: {itemids: [51237, 51675], unit: "", low: 0.5, high: 20.0}
+  pt_blood: {itemids: [51274, 52921], unit: sec, low: 8.0, high: 120.0}
+  ptt_blood: {itemids: [51275, 52923], unit: sec, low: 12.0, high: 240.0}
+  ast_blood: {itemids: [50878], unit: iu/l, low: 2.0, high: 20000.0}
+  alt_blood: {itemids: [50861, 53084], unit: iu/l, low: 2.0, high: 20000.0}
+  alp_blood: {itemids: [50863, 53086], unit: iu/l, low: 5.0, high: 20000.0}
+  bilirubin_total_blood: {itemids: [50885, 53089], unit: mg/dl, low: 0.1, high: 60.0}
+  albumin_blood: {itemids: [50862, 53085], unit: g/dl, low: 0.5, high: 7.0}
+  lactate_blood: {itemids: [50813, 52442, 53154], unit: mmol/l, low: 0.2, high: 30.0}
+  trop_t_blood: {itemids: [51003], unit: ng/ml, low: 0.0, high: 100.0}
+  trop_i_blood: {itemids: [51002, 52642], unit: ng/ml, low: 0.0, high: 100.0}
+  ntprobnp_blood: {itemids: [50963], unit: pg/ml, low: 5.0, high: 70000.0}
+icu_vitals:
+  heart_rate: {itemids: [220045], unit: bpm, low: 10.0, high: 300.0}
+  respiratory_rate: {itemids: [220210, 224690], unit: insp/min, low: 3.0, high: 80.0}
+  spo2: {itemids: [220277], unit: "%", low: 50.0, high: 100.0}
+  sbp_invasive: {itemids: [220050], unit: mmhg, low: 30.0, high: 300.0}
+  dbp_invasive: {itemids: [220051], unit: mmhg, low: 10.0, high: 200.0}
+  map_invasive: {itemids: [220052], unit: mmhg, low: 20.0, high: 250.0}
+  temperature_f: {itemids: [223761], unit: degf, low: 88.0, high: 110.0}

@@ -1,0 +1,56 @@
+variable,level,overall,dev,val,test,test_analytic
+Patients,n,"129,031","77,439","25,832","25,760","25,430"
+"Age at ECG, years",mean (SD),60.2 (18.3),60.2 (18.3),60.2 (18.4),60.3 (18.3),60.3 (18.3)
+"Age at ECG, years",median [IQR],62 [48–74],62 [48–74],62 [48–74],62 [49–74],62 [49–74]
+"Age band, n (%)",18–49,"34,531 (26.8)","20,814 (26.9)","6,923 (26.8)","6,794 (26.4)","6,699 (26.3)"
+"Age band, n (%)",50–64,"38,152 (29.6)","22,894 (29.6)","7,540 (29.2)","7,718 (30.0)","7,625 (30.0)"
+"Age band, n (%)",65–79,"34,939 (27.1)","20,845 (26.9)","7,143 (27.7)","6,951 (27.0)","6,868 (27.0)"
+"Age band, n (%)",≥80,"21,409 (16.6)","12,886 (16.6)","4,226 (16.4)","4,297 (16.7)","4,238 (16.7)"
+"Female sex, n (%)","","66,058 (51.2)","39,851 (51.5)","13,108 (50.7)","13,099 (50.9)","12,974 (51.0)"
+"Race and ethnicity, n (%)",White,"87,102 (67.5)","52,165 (67.4)","17,470 (67.6)","17,467 (67.8)","17,230 (67.8)"
+"Race and ethnicity, n (%)",Black,"17,153 (13.3)","10,293 (13.3)","3,409 (13.2)","3,451 (13.4)","3,423 (13.5)"
+"Race and ethnicity, n (%)",Hispanic/Latino,"6,905 (5.4)","4,187 (5.4)","1,335 (5.2)","1,383 (5.4)","1,369 (5.4)"
+"Race and ethnicity, n (%)",Asian,"4,433 (3.4)","2,725 (3.5)",912 (3.5),796 (3.1),789 (3.1)
+"Race and ethnicity, n (%)",Other or unknown,"13,438 (10.4)","8,069 (10.4)","2,706 (10.5)","2,663 (10.3)","2,619 (10.3)"
+"Care setting at ECG, n (%)",Emergency department,"64,799 (50.2)","38,837 (50.2)","12,911 (50.0)","13,051 (50.7)","12,906 (50.8)"
+"Care setting at ECG, n (%)","Inpatient, non-ICU","16,779 (13.0)","10,190 (13.2)","3,361 (13.0)","3,228 (12.5)","3,161 (12.4)"
+"Care setting at ECG, n (%)",ICU,"5,328 (4.1)","3,248 (4.2)","1,057 (4.1)","1,023 (4.0)",989 (3.9)
+"Care setting at ECG, n (%)",Other or unlinked,"40,847 (31.7)","24,412 (31.5)","8,231 (31.9)","8,204 (31.8)","8,125 (32.0)"
+"Care setting at ECG, n (%)",Ambiguous,"1,278 (1.0)",752 (1.0),272 (1.1),254 (1.0),249 (1.0)
+"Prior Elixhauser conditions, n (%)",0,"116,701 (90.4)","70,040 (90.4)","23,314 (90.3)","23,347 (90.6)","23,052 (90.6)"
+"Prior Elixhauser conditions, n (%)",1–2,"7,025 (5.4)","4,210 (5.4)","1,470 (5.7)","1,345 (5.2)","1,324 (5.2)"
+"Prior Elixhauser conditions, n (%)",≥3,"5,305 (4.1)","3,189 (4.1)","1,048 (4.1)","1,068 (4.1)","1,054 (4.1)"
+"Prior Elixhauser condition, n (%)",aids hiv,157 (0.1),99 (0.1),32 (0.1),26 (0.1),25 (0.1)
+"Prior Elixhauser condition, n (%)",alcohol abuse,"1,486 (1.2)",893 (1.2),285 (1.1),308 (1.2),302 (1.2)
+"Prior Elixhauser condition, n (%)",blood loss anemia,116 (0.1),69 (0.1),24 (0.1),23 (0.1),23 (0.1)
+"Prior Elixhauser condition, n (%)",cardiac arrhythmia,991 (0.8),623 (0.8),202 (0.8),166 (0.6),165 (0.6)
+"Prior Elixhauser condition, n (%)",chronic pulmonary disease,"2,171 (1.7)","1,275 (1.6)",452 (1.7),444 (1.7),443 (1.7)
+"Prior Elixhauser condition, n (%)",coagulopathy,715 (0.6),428 (0.6),151 (0.6),136 (0.5),136 (0.5)
+"Prior Elixhauser condition, n (%)",congestive heart failure,477 (0.4),282 (0.4),102 (0.4),93 (0.4),93 (0.4)
+"Prior Elixhauser condition, n (%)",deficiency anemia,527 (0.4),306 (0.4),110 (0.4),111 (0.4),110 (0.4)
+"Prior Elixhauser condition, n (%)",depression,"3,063 (2.4)","1,824 (2.4)",627 (2.4),612 (2.4),603 (2.4)
+"Prior Elixhauser condition, n (%)",diabetes complicated,715 (0.6),438 (0.6),144 (0.6),133 (0.5),127 (0.5)
+"Prior Elixhauser condition, n (%)",diabetes uncomplicated,"1,670 (1.3)",994 (1.3),339 (1.3),337 (1.3),333 (1.3)
+"Prior Elixhauser condition, n (%)",drug abuse,945 (0.7),583 (0.8),177 (0.7),185 (0.7),181 (0.7)
+"Prior Elixhauser condition, n (%)",fluid and electrolyte disorders,"1,827 (1.4)","1,102 (1.4)",361 (1.4),364 (1.4),360 (1.4)
+"Prior Elixhauser condition, n (%)",hypertension complicated,854 (0.7),504 (0.7),183 (0.7),167 (0.6),165 (0.6)
+"Prior Elixhauser condition, n (%)",hypertension uncomplicated,"4,654 (3.6)","2,800 (3.6)",940 (3.6),914 (3.5),899 (3.5)
+"Prior Elixhauser condition, n (%)",hypothyroidism,"1,397 (1.1)",821 (1.1),312 (1.2),264 (1.0),263 (1.0)
+"Prior Elixhauser condition, n (%)",liver disease,"1,248 (1.0)",747 (1.0),267 (1.0),234 (0.9),231 (0.9)
+"Prior Elixhauser condition, n (%)",lymphoma,332 (0.3),196 (0.3),65 (0.3),71 (0.3),71 (0.3)
+"Prior Elixhauser condition, n (%)",metastatic cancer,879 (0.7),517 (0.7),188 (0.7),174 (0.7),172 (0.7)
+"Prior Elixhauser condition, n (%)",obesity,"1,239 (1.0)",743 (1.0),240 (0.9),256 (1.0),248 (1.0)
+"Prior Elixhauser condition, n (%)",other neurological disorders,"1,131 (0.9)",682 (0.9),230 (0.9),219 (0.9),215 (0.8)
+"Prior Elixhauser condition, n (%)",paralysis,219 (0.2),123 (0.2),56 (0.2),40 (0.2),36 (0.1)
+"Prior Elixhauser condition, n (%)",peptic ulcer disease excluding bleeding,160 (0.1),101 (0.1),39 (0.2),20 (0.1),20 (0.1)
+"Prior Elixhauser condition, n (%)",peripheral vascular disorders,504 (0.4),295 (0.4),94 (0.4),115 (0.4),114 (0.4)
+"Prior Elixhauser condition, n (%)",psychoses,636 (0.5),397 (0.5),112 (0.4),127 (0.5),127 (0.5)
+"Prior Elixhauser condition, n (%)",pulmonary circulation disorders,155 (0.1),88 (0.1),36 (0.1),31 (0.1),31 (0.1)
+"Prior Elixhauser condition, n (%)",renal failure,"1,029 (0.8)",612 (0.8),219 (0.8),198 (0.8),195 (0.8)
+"Prior Elixhauser condition, n (%)",rheumatoid arthritis collagen,494 (0.4),302 (0.4),101 (0.4),91 (0.4),90 (0.4)
+"Prior Elixhauser condition, n (%)",solid tumor without metastasis,955 (0.7),577 (0.7),192 (0.7),186 (0.7),184 (0.7)
+"Prior Elixhauser condition, n (%)",valvular disease,366 (0.3),221 (0.3),77 (0.3),68 (0.3),68 (0.3)
+"Prior Elixhauser condition, n (%)",weight loss,654 (0.5),406 (0.5),112 (0.4),136 (0.5),134 (0.5)
+"Outcome, n (%)",30-day mortality,"4,699 (3.6)","2,853 (3.7)",906 (3.5),940 (3.6),924 (3.6)
+"Outcome, n (%)",90-day mortality,"7,507 (5.8); ascertainable n=128,889","4,538 (5.9); ascertainable n=77,346","1,473 (5.7); ascertainable n=25,813","1,496 (5.8); ascertainable n=25,730","1,473 (5.8); ascertainable n=25,401"
+"Outcome, n (%)",1-year mortality,"13,099 (10.2); ascertainable n=127,801","7,913 (10.3); ascertainable n=76,688","2,618 (10.2); ascertainable n=25,596","2,568 (10.1); ascertainable n=25,517","2,535 (10.1); ascertainable n=25,191"

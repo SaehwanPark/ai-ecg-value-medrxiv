@@ -1,0 +1,7 @@
+validity_group,representation,error_category,n
+b_only_valid,a_error,ciis_insufficient_rpeaks,15
+b_only_valid,b_error,none,15
+neither_valid,a_error,waveform_nan_inf,302
+neither_valid,a_error,waveform_file_missing,13
+neither_valid,b_error,waveform_nan_inf,302
+neither_valid,b_error,waveform_file_missing,13

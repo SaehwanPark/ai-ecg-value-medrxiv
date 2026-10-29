@@ -1,0 +1,5 @@
+validity_group,n,n_deaths_30d,mortality_rate_30d,age_mean,age_median,pct_female,n_setting_ED,n_setting_ICU,n_setting_ambiguous,n_setting_inpatient_non_ICU,n_setting_other_or_unlinked,pct_of_locked_test
+both_valid,25430,924,0.03634,60.27,62.0,51.02,12906,989,249,3161,8125,98.72
+a_only_valid,0,<11,<11,,,,<11,<11,<11,<11,<11,0.0
+b_only_valid,15,<11,<11,72.87,75.0,53.33,<11,<11,<11,<11,<11,0.06
+neither_valid,315,15,0.04762,58.73,60.0,37.14,135,33,<11,67,75,1.22

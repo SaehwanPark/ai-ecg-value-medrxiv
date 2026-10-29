@@ -1,0 +1,28 @@
+# LM4 CODE-15% local recalibration frozen configuration.
+#
+# Recalibration of the transported frozen MIMIC A/B scores on CODE-15% 1-year
+# mortality. Maps are fitted on the CODE validation split only and evaluated
+# exactly once on the untouched CODE locked test. Analysis status: post hoc
+# extension. The frozen transport analysis is never modified.
+version: code15_recalibration_v1
+
+# Primary horizon: 1-year mortality (different-horizon association). The 30-day
+# CODE track is descriptive only and is never recalibrated formally.
+horizon: 365d
+
+# Split rule: fit R1/R2 on CODE validation only; never on test; never combining
+# test with development or validation.
+fit_split: val
+eval_split: test
+
+# Numerical-stability clipping for logit computation only.
+epsilon: 1.0e-6
+
+# Optional separate sensitivity: number of validation bootstrap replicates used
+# to expose calibration-map uncertainty (refit inside each replicate, evaluated
+# on the fixed locked test). Kept separate from the primary result.
+n_val_refit_sensitivity: 1000
+seed: 1912
+
+# v1 restriction: no isotonic regression, splines, or other calibration methods.
+allowed_variants: [R0_frozen, R1_intercept, R2_intercept_slope]

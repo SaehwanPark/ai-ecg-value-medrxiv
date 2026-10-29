@@ -1,0 +1,14 @@
+{
+  "ascertainment_excluded": 32247,
+  "cohort": 129031,
+  "dev": 77439,
+  "dev_analytic": 76590,
+  "ecgs": 800035,
+  "eligible_adults": 161278,
+  "patients_initial": 161352,
+  "test": 25760,
+  "test_analytic": 25430,
+  "test_events": 924,
+  "val": 25832,
+  "val_analytic": 25526
+}

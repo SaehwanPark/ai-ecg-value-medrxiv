@@ -1,0 +1,9 @@
+variable,level,group,n,share
+care_setting,ambiguous,included,1278,0.009904596569816555
+care_setting,other_or_unlinked,included,40847,0.3165673365315312
+care_setting,other_or_unlinked,excluded,10393,0.3222935466865135
+care_setting,ICU,excluded,13,0.0004031382764288151
+care_setting,ICU,included,5328,0.04129240260092536
+care_setting,inpatient_non_ICU,included,16779,0.1300385178755493
+care_setting,ED,included,64799,0.5021971464221776
+care_setting,ED,excluded,21841,0.6773033150370578

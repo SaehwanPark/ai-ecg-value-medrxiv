@@ -1,0 +1,21 @@
+version: 1
+run_id: 20261009_cascade_audit_round01_03
+source_run_id: 20261009_ecg_only_v2_08
+source_run_dir: artifacts/probability_cascade/v2/20261009_ecg_only_v2_08
+output_root: artifacts/probability_cascade/audit_round01
+public_output_root: docs/probability_cascade/audit_round01
+review_capacity: 0.05
+routing_targets: [0.05, 0.10, 0.20, 0.40]
+target_b_utilization: 0.20
+bootstrap_replicates: 1000
+seed: 42
+internal_split_seed: 20261009
+
+inputs:
+  cohort_path: artifacts/cohort/primary_cohort.parquet
+  reps_dir: artifacts/reps
+  meta_a_path: artifacts/reps/ciis_features_meta.parquet
+  features_a_path: artifacts/reps/ciis_features.npy
+  meta_b_path: artifacts/reps/dbeta_embedding_meta.parquet
+  embeddings_b_path: artifacts/reps/dbeta_embeddings.npy
+  pair_validity_path: artifacts/reps/representation_pair_validity.parquet

@@ -1,0 +1,25 @@
+version: 1
+run_id: 20261009_cascade_audit_round02_02
+source_v2_run_id: 20261009_ecg_only_v2_08
+source_v2_run_dir: artifacts/probability_cascade/v2/20261009_ecg_only_v2_08
+source_audit_run_id: 20261009_cascade_audit_round01_03
+source_audit_run_dir: artifacts/probability_cascade/audit_round01/20261009_cascade_audit_round01_03
+output_root: artifacts/probability_cascade/audit_round02
+public_output_root: docs/probability_cascade/audit_round02
+review_capacity: 0.05
+high_a_utilization: 0.15
+additional_discordance_utilization: 0.05
+surrogate_alphas: [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]
+crossfit_folds: 5
+crossfit_seed: 20261010
+bootstrap_replicates: 1000
+bootstrap_seed: 20261010
+
+inputs:
+  cohort_path: artifacts/cohort/primary_cohort.parquet
+  reps_dir: artifacts/reps
+  meta_a_path: artifacts/reps/ciis_features_meta.parquet
+  features_a_path: artifacts/reps/ciis_features.npy
+  meta_b_path: artifacts/reps/dbeta_embedding_meta.parquet
+  embeddings_b_path: artifacts/reps/dbeta_embeddings.npy
+  pair_validity_path: artifacts/reps/representation_pair_validity.parquet

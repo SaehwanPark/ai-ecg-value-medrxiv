@@ -1,0 +1,95 @@
+# LM6 post hoc sensitivity. Rules below are frozen before recovery counts,
+# history-stratum metrics, or any new locked-test score are read.
+version: lm6_ascertainment_history_v1
+analysis_status: post_hoc_sensitivity
+horizon_days: 30
+# Known 30-day survivor only with a timestamp strictly after index ECG + horizon.
+# A missing death date is never itself evidence of survival.
+evidence_sources:
+  - later_hospital_admission
+  - later_ed_registration
+  - later_laboratory
+  - later_icu_stay
+  - later_ecg
+evidence_time_columns:
+  later_hospital_admission: admit_dt
+  later_ed_registration: edreg_dt
+  later_laboratory: charttime
+  later_icu_stay: intime
+  later_ecg: ecg_datetime
+# Earliest qualifying timestamp. Equal timestamps break ties by source name.
+evidence_tie_break: source_name
+billing_diagnosis_dates_allowed: false
+# ICU evidence is icustays.intime (start of the charted stay), not a chartevents scan.
+# A chart row cannot precede the stay, and chartevents is not an extra source.
+icu_evidence: icustays.intime
+unknown_remains_unknown: true
+# Recovered patients were never in the parent split file. Assign them with the
+# parent seed, preserving every existing assignment, and write the sensitivity
+# split only under the LM6 artifact directory.
+recovered_split:
+  seed: 42
+  dev: 0.6
+  val: 0.2
+  test: 0.2
+  overwrite_primary_split: false
+ipcw:
+  status: infeasible
+  reason: >
+    Patients excluded by the parent rule have no discharge that covers day 30,
+    so there is no censoring time that is defined for every pre-ascertainment
+    patient without reusing the same post-day-30 contact as both survival
+    evidence and a censoring mechanism. IPCW is not run.
+selection_continuous:
+  - age_at_ecg
+  - ecg_year
+  - n_prior_admissions
+  - days_since_last_discharge
+  - heart_rate_bpm
+  - qrs_duration_ms
+  - qtc_bazett_ms
+selection_binary:
+  - sex_female
+  - any_prior_comorbidity
+  - prior_icu
+selection_categorical:
+  - care_setting
+# Excluded ECGs are outside the primary representation cache. v1 does not
+# extract CIIS or D-BETA only to describe selection.
+representation_summaries: omitted_v1
+history:
+  naive: n_prior_completed_admissions == 0
+  present: n_prior_completed_admissions >= 1
+  ordered_groups: ["0", "1", "2+"]
+  min_events_for_interval: 11
+  index_admission_diagnoses_excluded: true
+  # Undefined times (no prior discharge / no prior encounter) are not filled
+  # with a sentinel. Development-median imputation plus an explicit missingness
+  # indicator. Medians are fit on development rows only.
+  imputed_features:
+    - days_since_last_discharge
+    - days_since_first_encounter
+  h_features:
+    - n_prior_admissions
+    - log1p_prior_admissions
+    - days_since_last_discharge
+    - missing_days_since_last_discharge
+    - cumulative_prior_hospital_days
+    - prior_icu
+    - days_since_first_encounter
+    - missing_days_since_first_encounter
+    - n_prior_elixhauser
+  models: [C0A, C0B, C0H, C0HA, C0HB]
+  primary_contrasts:
+    - b_minus_a_history_naive
+    - b_minus_a_history_present
+    - c0hb_minus_c0ha
+bootstrap:
+  n_replicates: 1000
+  seed: 62026
+  stratified: true
+  invalid_replicate_rule: >
+    A replicate that lacks both outcome classes in a required stratum is skipped
+    for that contrast only. If fewer than 90% of replicates remain valid, no
+    interval is reported for that contrast.
+  min_valid_fraction: 0.90

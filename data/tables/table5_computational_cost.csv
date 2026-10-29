@@ -1,0 +1,11 @@
+source,pathway,median_ms_per_ecg,range_ms_per_ecg,ratio_to_ciis,peak_rss_mb,n_parameters,storage_bytes_per_ecg,fit_seconds
+controlled_extraction_benchmark_1024_ecgs,wfdb_read_local_disk,2.846262369132546,,,,,,
+controlled_extraction_benchmark_1024_ecgs,ciis_cpu_single_process,6.348894042957909,6.31-6.57,,710.875,,,
+controlled_extraction_benchmark_1024_ecgs,dbeta_cpu_batch64,20.459634887686207,20.38-20.50,3.2225510064039744,5902.0,288617472,,
+controlled_extraction_benchmark_1024_ecgs,dbeta_mps_batch64,4.0841748046887005,4.08-4.09,0.6432891739969738,5902.140625,288617472,,
+controlled_downstream_benchmark_paired_valid,probe_A_ecg_only,6.601453740098465e-6,,,,16,,0.11364375002449378
+controlled_downstream_benchmark_paired_valid,probe_B_ecg_only,0.0002356984868105113,,,,769,,3.2041214590426534
+controlled_downstream_benchmark_paired_valid,probe_C0_plus_A,0.000015510715343896042,,,,49,,0.1615882909973152
+controlled_downstream_benchmark_paired_valid,probe_C0_plus_B,0.00024803216599156503,,,,802,,3.345541500020772
+full_cohort_extraction_log_not_hardware_matched,ciis_features_cpu,1.5689757484015763,,,,,120.00099200967209,
+full_cohort_extraction_log_not_hardware_matched,dbeta_embedding_mps,14.319316241833604,,,,,6144.000992009672,

@@ -1,0 +1,66 @@
+{
+  "analysis_origin": {
+    "analysis": "LM1b frozen locked-test evaluation (ecg-rep cart-report-baseline)",
+    "config_sha256": "cc719f6760a59b6e816cc70318746c9eb98d29f8a363e50d8824a8f152337aa6",
+    "origin_merge_commit": "6c003c1",
+    "regeneration": "2026-10-15 on fix/round01-20261015-followup: deterministic re-run reproduced every pre-existing ledger field byte-identically and added test_population_sha256 only.",
+    "vocabulary_sha256": "cafb1a01fd863088e3074ba08e5124facd192794c9972e8d01268e96d4e195da"
+  },
+  "description": "Nonidentifying aggregate receipt for the LM1 cart-report reference analysis (cart_report_baseline). Enables population-identity and metric verification by the cart add-on contrast (cart_addon_contrast) without committing patient-level artifacts. No subject_id, study_id, prediction, or outcome row is present.",
+  "expected_models": {
+    "LM1_C_A2": {
+      "best_c": 0.01,
+      "n_features": 235,
+      "test_metrics": {
+        "auprc": 0.1686160243617688,
+        "auroc": 0.8329022612361386,
+        "brier": 0.03246462296478981,
+        "calibration_intercept": 0.03576980568766505,
+        "calibration_slope": 1.0136944633997118,
+        "log_loss": 0.12867240723820575,
+        "n": 25430,
+        "n_events": 924
+      }
+    },
+    "LM1_C_A2_B": {
+      "best_c": 0.001,
+      "n_features": 1003,
+      "test_metrics": {
+        "auprc": 0.18006802373868208,
+        "auroc": 0.8404380074073211,
+        "brier": 0.03210946549474182,
+        "calibration_intercept": 0.04135719589985659,
+        "calibration_slope": 1.018043450168595,
+        "log_loss": 0.126927706859422,
+        "n": 25430,
+        "n_events": 924
+      }
+    },
+    "LM1_C_B": {
+      "best_c": 0.001,
+      "n_features": 801,
+      "test_metrics": {
+        "auprc": 0.17658139187617533,
+        "auroc": 0.8365743895920179,
+        "brier": 0.032182030988178,
+        "calibration_intercept": 0.1118940836919734,
+        "calibration_slope": 1.046850324969866,
+        "log_loss": 0.12772907349414953,
+        "n": 25430,
+        "n_events": 924
+      }
+    }
+  },
+  "notes": [
+    "expected_models entries are copied verbatim from artifacts/limitation_mitigation/lm1/cart_report_models.json.",
+    "All LM1 rows remain post hoc extension on the A''-valid paired-valid locked-test surface.",
+    "The add-on contrast itself (c_a2_b_minus_c_a2) is reported in docs/limitation_mitigation/lm1_cart_addon_contrast.md and docs/manuscript/tables/supp_cart_addon_contrast.csv."
+  ],
+  "population": {
+    "hash_definition": "sha256 over lexically sorted '<subject_id>,<study_id>' lines joined by newline (UTF-8)",
+    "n_events": 924,
+    "n_test": 25430,
+    "test_population_sha256": "44c7d68841bfdc423ba9f9d2bc5cf12d4621d9c782b25ed6df2e5580560b3475"
+  },
+  "schema_version": "lm1_reference_aggregates_v1"
+}

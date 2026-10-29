@@ -1,0 +1,33 @@
+# Pre-ECG context inventory. G3 approved the Cacute variable list and missingness
+# policy on 2026-10-05 (decisions D4/D5). Same-subset Cacute probes are fit by
+# `ecg-rep clinical-cacute`; this file specifies the availability inventory.
+status: g3_approved
+model_refit: clinical-cacute
+vital_lookback_hours: 6
+lab_lookback_hours: 24
+require_result_available_at_ecg: true
+missing_storetime_policy: exclude
+interval: "charttime and storetime at or before the index ECG, charttime inside the lookback"
+labs:
+  creatinine_blood: [50912]
+  potassium_blood: [50971]
+  hemoglobin_blood: [51222]
+  wbc_blood: [51301]
+  lactate_blood_gas: [50813]
+  troponin_i: [51002, 52642]
+  troponin_t: [51003]
+vitals:
+  heart_rate: [220045]
+  respiratory_rate: [220210]
+  spo2: [220277]
+  sbp_noninvasive: [220179]
+  dbp_noninvasive: [220180]
+  sbp_arterial: [220050]
+  dbp_arterial: [220051]
+  temperature_celsius: [223762]
+  temperature_fahrenheit: [223761]
+notes:
+  - Troponin is inventoried for the mortality-context discussion only.
+  - Do not use troponin as an AMI predictor if it is also used to define AMI.
+  - MIMIC-IV-ED is not installed, so ED triage vitals are not in this ledger.
+  - ICU chartevents do not represent ward or ED vital availability.

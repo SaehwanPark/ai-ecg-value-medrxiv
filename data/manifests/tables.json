@@ -1,0 +1,348 @@
+{
+  "main_displays": [
+    {
+      "file": "table1_cohort_characteristics.csv",
+      "id": "Table 1",
+      "title": "Cohort characteristics by patient split"
+    },
+    {
+      "file": "table2_overall_performance.csv",
+      "id": "Table 2",
+      "title": "Primary performance in paired-evaluable test patients"
+    },
+    {
+      "file": "table3_incremental_value_and_controls.csv",
+      "id": "Table 3",
+      "title": "Primary comparisons, add-on increments and prespecified controls"
+    },
+    {
+      "file": "table4_subgroup_gain.csv",
+      "id": "Table 4",
+      "title": "Additional ECG information, clinical context, and event-capture comparisons"
+    }
+  ],
+  "supplementary_tables": [
+    "calibration_curve_deciles.csv",
+    "calibration_summary.csv",
+    "canonical_ciis_by_category.csv",
+    "supp_ami_pretraining_control.csv",
+    "supp_bootstrap_estimand_sensitivity.csv",
+    "supp_cart_addon_contrast.csv",
+    "supp_cart_report_comparator.csv",
+    "supp_cmax_samesubset.csv",
+    "supp_code15_recalibration.csv",
+    "supp_compute_benchmark.csv",
+    "supp_compute_scaling.csv",
+    "supp_dbeta_parity_records.csv",
+    "supp_dbeta_parity_summary.csv",
+    "supp_downstream_benchmark.csv",
+    "supp_label_efficiency.csv",
+    "supp_lm6_ascertainment_selection.csv",
+    "supp_lm6_ascertainment_setting.csv",
+    "supp_machine_baseline_contrasts.csv",
+    "supp_machine_baseline_models.csv",
+    "supp_mimic_paired_valid_exclusion_audit.csv",
+    "supp_paired_valid_error_categories_by_group.csv",
+    "supp_probability_cascade_dca.csv",
+    "supp_probability_cascade_frontier.csv",
+    "supp_ptbxl_feature_agreement.csv",
+    "supp_ptbxl_item_agreement.csv",
+    "supp_random_encoder_control.csv",
+    "supp_refit_uncertainty.csv",
+    "supp_risk_strata.csv",
+    "supp_subgroup_pairwise_adjusted.csv",
+    "supp_subgroup_simultaneous.csv",
+    "table5_computational_cost.csv",
+    "table6_limitation_mitigation.csv"
+  ],
+  "tables": [
+    {
+      "columns": 8,
+      "display": null,
+      "file": "calibration_curve_deciles.csv",
+      "rows": 60,
+      "sha256": "c3580f314294c6e0bab44d053f513367aeac88d42f99552f54a31233a0ebde4a",
+      "title": null
+    },
+    {
+      "columns": 17,
+      "display": null,
+      "file": "calibration_summary.csv",
+      "rows": 6,
+      "sha256": "1c566ea2942e46230a7a281ad61ed3175ae37ab3f3a374aee2b588fbc496851a",
+      "title": null
+    },
+    {
+      "columns": 4,
+      "display": null,
+      "file": "canonical_ciis_by_category.csv",
+      "rows": 4,
+      "sha256": "1dceb2de8bf3464a6e813b81aaf1b536cd13d4afb589c9fba7d006ce440fb6c1",
+      "title": null
+    },
+    {
+      "columns": 6,
+      "display": null,
+      "file": "supp_ami_pretraining_control.csv",
+      "rows": 20,
+      "sha256": "a5774a128e18b64ebc1bbbb1416a226fb28f1b2a8e1974ca9ebbfbe0fa4faab7",
+      "title": null
+    },
+    {
+      "columns": 16,
+      "display": null,
+      "file": "supp_bootstrap_estimand_sensitivity.csv",
+      "rows": 8,
+      "sha256": "4bd2783cd06b80ccada5735ad5afbceec1ed62a60a2bb9f268f231828c9b0529",
+      "title": null
+    },
+    {
+      "columns": 9,
+      "display": null,
+      "file": "supp_cart_addon_contrast.csv",
+      "rows": 2,
+      "sha256": "89a2f37f7faa2d823737e5e3a25090c471135562cd87e98da1d7f9a9054b3dc8",
+      "title": null
+    },
+    {
+      "columns": 9,
+      "display": null,
+      "file": "supp_cart_report_comparator.csv",
+      "rows": 16,
+      "sha256": "42f49126f4ee0ee4cf71e0e79d3424dcf616d0496e272c77a76eb38c36cc71d9",
+      "title": null
+    },
+    {
+      "columns": 8,
+      "display": null,
+      "file": "supp_cmax_samesubset.csv",
+      "rows": 10,
+      "sha256": "d7fc5a2c9cfdc97e26dce96212ae4af23ea8339f5429e94db1f62f92fbc30eca",
+      "title": null
+    },
+    {
+      "columns": 10,
+      "display": null,
+      "file": "supp_code15_recalibration.csv",
+      "rows": 6,
+      "sha256": "1cabf18aa334e0185653a7fc9c8fcbb7c45fd812983586d124c2ea66de9ea5b3",
+      "title": null
+    },
+    {
+      "columns": 8,
+      "display": null,
+      "file": "supp_compute_benchmark.csv",
+      "rows": 4,
+      "sha256": "858ad2c71da0f3440cfe7f223335fa725294503fc921ecd699ee1ed438e4fc75",
+      "title": null
+    },
+    {
+      "columns": 15,
+      "display": null,
+      "file": "supp_compute_scaling.csv",
+      "rows": 44,
+      "sha256": "c1473137dbef8cc25393faa8e8e1c5e259cc449d85b3edb859b032723504ee7b",
+      "title": null
+    },
+    {
+      "columns": 3,
+      "display": null,
+      "file": "supp_dbeta_parity_records.csv",
+      "rows": 64,
+      "sha256": "1cba850f452a1747694fd21cd1d913f06481d568adffb9db9bc6161ec16e4e88",
+      "title": null
+    },
+    {
+      "columns": 7,
+      "display": null,
+      "file": "supp_dbeta_parity_summary.csv",
+      "rows": 3,
+      "sha256": "73381907f6a9011ee7155243d5e0119c024faf794e818d71f8e661aec7947fd2",
+      "title": null
+    },
+    {
+      "columns": 9,
+      "display": null,
+      "file": "supp_downstream_benchmark.csv",
+      "rows": 4,
+      "sha256": "d75969a4e6723a3867768f58041c3dd48eb5b8567a959e5523d464d2b756fb28",
+      "title": null
+    },
+    {
+      "columns": 9,
+      "display": null,
+      "file": "supp_label_efficiency.csv",
+      "rows": 24,
+      "sha256": "2b1b80b1dd7fa24fc4fcedf982f8e048c5adf652d7c24e97d3ef1a57c0320c77",
+      "title": null
+    },
+    {
+      "columns": 6,
+      "display": null,
+      "file": "supp_lm6_ascertainment_selection.csv",
+      "rows": 10,
+      "sha256": "c70320acbdb02667d83d3c1e31c483a56b49c19bf6ea7dd64d97c072faaf60c0",
+      "title": null
+    },
+    {
+      "columns": 5,
+      "display": null,
+      "file": "supp_lm6_ascertainment_setting.csv",
+      "rows": 8,
+      "sha256": "1998d9ed7dd76c1c200f4b1b72f325977f311b6231ae575aa7850cbfa7196ec3",
+      "title": null
+    },
+    {
+      "columns": 7,
+      "display": null,
+      "file": "supp_machine_baseline_contrasts.csv",
+      "rows": 9,
+      "sha256": "b2a4bbc8c2b9867298034adb093429a68e88e5372098dbe36175305d0a9b2f85",
+      "title": null
+    },
+    {
+      "columns": 7,
+      "display": null,
+      "file": "supp_machine_baseline_models.csv",
+      "rows": 6,
+      "sha256": "9eca7aa1d3e0e354c9c3aeaab307473d8617d31fe739aedff9991556f8f53466",
+      "title": null
+    },
+    {
+      "columns": 13,
+      "display": null,
+      "file": "supp_mimic_paired_valid_exclusion_audit.csv",
+      "rows": 4,
+      "sha256": "aeb0804c1595ba617787147f2510dc27d39f627f22e1973531afa0d95091f229",
+      "title": null
+    },
+    {
+      "columns": 4,
+      "display": null,
+      "file": "supp_paired_valid_error_categories_by_group.csv",
+      "rows": 6,
+      "sha256": "2fa00c1db6674b3d30cc6d54903694329bd95c77cbed25d1e7cbec2daca4dc69",
+      "title": null
+    },
+    {
+      "columns": 9,
+      "display": null,
+      "file": "supp_probability_cascade_dca.csv",
+      "rows": 128,
+      "sha256": "c5072c076abbf4e087e7cb913253ab66c1b3135272e313d10e43cf9590416f8c",
+      "title": null
+    },
+    {
+      "columns": 29,
+      "display": null,
+      "file": "supp_probability_cascade_frontier.csv",
+      "rows": 10,
+      "sha256": "5e30f29d6a8cc2934ed2041074d9aa4e4419ce955a86078817c9e26f36b2a050",
+      "title": null
+    },
+    {
+      "columns": 12,
+      "display": null,
+      "file": "supp_ptbxl_feature_agreement.csv",
+      "rows": 15,
+      "sha256": "72ff79ddc81556bf54f217cacc1a9e190c05d613cd633f8aef16b35aa29624c2",
+      "title": null
+    },
+    {
+      "columns": 9,
+      "display": null,
+      "file": "supp_ptbxl_item_agreement.csv",
+      "rows": 12,
+      "sha256": "b4993842442e5478dff1fc6f59a1fe83f3dd050a59ae45555c0751bd9be6fbbe",
+      "title": null
+    },
+    {
+      "columns": 19,
+      "display": null,
+      "file": "supp_random_encoder_control.csv",
+      "rows": 20,
+      "sha256": "b6fbe319086a67e4e5c0701f9d35570f704efb90aa3ce15a52406cec5f457c10",
+      "title": null
+    },
+    {
+      "columns": 11,
+      "display": null,
+      "file": "supp_refit_uncertainty.csv",
+      "rows": 6,
+      "sha256": "4bf9c81b1dd43c6d8d58be5f34b0f3cfcd1168379a6cdea59ebbf287dc2bbdcf",
+      "title": null
+    },
+    {
+      "columns": 38,
+      "display": null,
+      "file": "supp_risk_strata.csv",
+      "rows": 4,
+      "sha256": "628a3ec708c93253e4c6f1e1c9a979058008d567a6db7414058b6de842b4ca91",
+      "title": null
+    },
+    {
+      "columns": 10,
+      "display": null,
+      "file": "supp_subgroup_pairwise_adjusted.csv",
+      "rows": 14,
+      "sha256": "307d88360841364692a19f6f8a10ef95f5d79a5607567b77593a80f791bb28d8",
+      "title": null
+    },
+    {
+      "columns": 12,
+      "display": null,
+      "file": "supp_subgroup_simultaneous.csv",
+      "rows": 11,
+      "sha256": "50ac273602b5001c8e0f952674e5095503e87d55fbf4fae83e6055b162374ef1",
+      "title": null
+    },
+    {
+      "columns": 7,
+      "display": "Table 1",
+      "file": "table1_cohort_characteristics.csv",
+      "rows": 55,
+      "sha256": "bbe18a804274606b0cdf567f8fc9e1d45c4f85a7649eeda3bd251f1b1dfe6dd7",
+      "title": "Cohort characteristics by patient split"
+    },
+    {
+      "columns": 17,
+      "display": "Table 2",
+      "file": "table2_overall_performance.csv",
+      "rows": 6,
+      "sha256": "b90cc8ff0b298f94da7084a0ff84d4d314035e4f4aea002d8770d2a3187eac0b",
+      "title": "Primary performance in paired-evaluable test patients"
+    },
+    {
+      "columns": 9,
+      "display": "Table 3",
+      "file": "table3_incremental_value_and_controls.csv",
+      "rows": 26,
+      "sha256": "8632b83edb3e1bbb1487475e4854dfba1658caf1e17e7cc810cb5f9c9fcb2efc",
+      "title": "Primary comparisons, add-on increments and prespecified controls"
+    },
+    {
+      "columns": 10,
+      "display": "Table 4",
+      "file": "table4_subgroup_gain.csv",
+      "rows": 44,
+      "sha256": "989e80c20d3a81dd4d0b17e44aa66844507771824dce18ab385192ae73142c2b",
+      "title": "Additional ECG information, clinical context, and event-capture comparisons"
+    },
+    {
+      "columns": 9,
+      "display": null,
+      "file": "table5_computational_cost.csv",
+      "rows": 10,
+      "sha256": "8c304343c9ad8551a98351d4b6bdab28bd617a6775af9d52567305f1cef32bb2",
+      "title": null
+    },
+    {
+      "columns": 17,
+      "display": null,
+      "file": "table6_limitation_mitigation.csv",
+      "rows": 490,
+      "sha256": "da2345f58e16f63b020a24b0fc65249316c96f7dc5688e3510cbd40baccdaf42",
+      "title": null
+    }
+  ]
+}

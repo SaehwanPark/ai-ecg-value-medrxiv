@@ -1,0 +1,97 @@
+# Draft overt-ECG lexicon. Status is clinical_review_pending.
+# Jennifer Lewey has not approved these rules. Do not apply them to locked-test
+# mortality sensitivity until G2 is recorded in docs/clinical_extensions/decisions.md.
+version: clinical-review-pending-v0
+status: clinical_review_pending
+# A line that matches one of these is not a definite positive for that line.
+uncertainty_patterns:
+  - "\\bCONSIDER\\b"
+  - "\\bPOSSIBLE\\b"
+  - "\\bPROBABLE\\b"
+  - "\\bBORDERLINE\\b"
+  - "\\bEQUIVOCAL\\b"
+  - "\\bMAY BE\\b"
+  - "\\bSUGGESTS\\b"
+  - "CANNOT RULE OUT"
+  - "CANNOT EXCLUDE"
+  - "CANNOT BE EXCLUDED"
+negation_patterns:
+  - "NO EVIDENCE OF"
+  - "NEGATIVE FOR"
+  - "RULED OUT"
+  - "\\bWITHOUT\\b"
+  - "\\bABSENT\\b"
+  - "\\bNO\\b"
+  - "\\bNOT\\b"
+temporality_patterns:
+  - "\\bOLD\\b"
+  - "\\bPRIOR\\b"
+  - "\\bPREVIOUS\\b"
+  - "HISTORY OF"
+  - "AGE UNDETERMINED"
+  - "AGE INDETERMINATE"
+uninterpretable_patterns:
+  - "DATA QUALITY MAY AFFECT"
+  - "UNABLE TO INTERPRET"
+  - "TECHNICALLY UNSATISFACTORY"
+overt_major:
+  - id: acute_st_elevation_mi
+    patterns:
+      - "ACUTE ST ELEVATION MI"
+      - "\\bSTEMI\\b"
+      - "ACUTE (ANTERIOR|INFERIOR|LATERAL|ANTEROLATERAL|ANTEROSEPTAL|POSTERIOR) (INFARCT|INJURY|MI)\\b"
+  - id: ventricular_tachycardia
+    patterns:
+      - "\\bVENTRICULAR TACHYCARDIA\\b"
+    downgrade_if_patterns:
+      - "\\bUNSUSTAINED\\b"
+    downgrade_to: unsustained_ventricular_tachycardia
+  - id: ventricular_fibrillation
+    patterns:
+      - "\\bVENTRICULAR FIBRILLATION\\b"
+      - "\\bTORSADES?\\b"
+      - "\\bVENTRICULAR FLUTTER\\b"
+  - id: complete_av_block
+    patterns:
+      - "AV BLOCK, COMPLETE"
+      - "COMPLETE HEART BLOCK"
+      - "THIRD DEGREE AV"
+      - "3RD DEGREE AV"
+other_major:
+  - id: atrial_fibrillation
+    patterns:
+      - "\\bATRIAL FIBRILLATION\\b"
+  - id: atrial_flutter
+    patterns:
+      - "\\bATRIAL FLUTTER\\b"
+  - id: left_bundle_branch_block
+    patterns:
+      - "\\bLEFT BUNDLE BRANCH BLOCK\\b"
+      - "\\bLBBB\\b"
+  - id: right_bundle_branch_block
+    patterns:
+      - "\\bRIGHT BUNDLE BRANCH BLOCK\\b"
+      - "\\bRBBB\\b"
+  - id: lvh_with_strain
+    patterns:
+      - "LVH WITH SECONDARY REPOLARIZATION"
+      - "\\bWITH STRAIN\\b"
+  - id: old_or_undetermined_infarct
+    patterns:
+      - "\\b(INFERIOR|ANTERIOR|ANTEROSEPTAL|ANTEROLATERAL|LATERAL|SEPTAL|POSTERIOR) INFARCT\\b"
+    require_any_patterns:
+      - "\\bOLD\\b"
+      - "AGE UNDETERMINED"
+      - "AGE INDETERMINATE"
+  - id: paced_rhythm
+    patterns:
+      - "PACEMAKER RHYTHM"
+      - "VENTRICULAR PACING"
+  - id: prolonged_qt
+    patterns:
+      - "PROLONGED QT"
+  - id: suggested_pericarditis
+    patterns:
+      - "\\bPERICARDITIS\\b"
+nonspecific_patterns:
+  - "\\bNONSPECIFIC\\b"

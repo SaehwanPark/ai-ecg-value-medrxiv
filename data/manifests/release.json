@@ -1,0 +1,7 @@
+{
+  "release_date": "2026-10-24",
+  "repository": "https://github.com/SaehwanPark/ai-ecg-value-medrxiv",
+  "scope": "analysis pipeline code plus aggregate-only reproduction of main tables and figures",
+  "tag": "v3.0.11",
+  "version": "v3.0.11"
+}

@@ -1,0 +1,3 @@
+contrast,metric,reference,model,point_estimate,ci_lower,ci_upper,n_test,n_events
+c_a2_b_minus_c_a2,auroc,LM1_C_A2,LM1_C_A2_B,0.007535746171182467,-0.0004806833682925698,0.015067283637225697,25430,924
+c_a2_b_minus_c_a2,auprc,LM1_C_A2,LM1_C_A2_B,0.011451999376913269,-0.00044844410415103956,0.023693230160625904,25430,924

@@ -1,0 +1,11 @@
+variable,kind,smd_included_minus_excluded,n_included_nonnull,n_excluded_nonnull,reason
+age_at_ecg,continuous,0.8885904518757564,129031,32247,ok
+ecg_year,continuous,0.002091914143321642,129031,32247,ok
+n_prior_admissions,continuous,0.17852428162762296,129031,32247,ok
+days_since_last_discharge,continuous,-1.2630694351462584,15242,2011,ok
+heart_rate_bpm,continuous,0.18006329993108267,128900,32211,ok
+qrs_duration_ms,continuous,0.2765402383162363,128890,32211,ok
+qtc_bazett_ms,continuous,0.4806523404861059,128893,32210,ok
+sex_female,binary,-0.11286180723641266,129031,32247,ok
+any_prior_comorbidity,binary,0.24790294830794357,129031,32247,ok
+prior_icu,binary,0.31899305219119245,129031,32247,ok

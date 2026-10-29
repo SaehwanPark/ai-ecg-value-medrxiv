@@ -1,0 +1,35 @@
+# LM7 post hoc reporting sensitivity. Uncertainty presentation only.
+# Subgroup levels and the B-A point estimates stay the prespecified ones.
+version: lm7_subgroup_multiplicity_v1
+analysis_status: post_hoc_reporting_sensitivity
+metric: auroc
+score_source: frozen_primary_context_adjusted
+# Unstandardized max absolute deviation. A standardized max-T would need a
+# within-level SE that is unstable for the small race/ethnicity cells.
+deviation: unstandardized_absolute
+# One stratified patient bootstrap of the comparison population per replicate.
+# Every level is scored on that same resample.
+bootstrap:
+  n_replicates: 1000
+  seed: 72026
+  stratified: true
+  min_valid_fraction: 0.90
+  invalid_replicate_rule: >
+    A level replicate without both outcome classes is invalid for that level
+    only. The max statistic uses a replicate only when every band-eligible
+    level is valid. A level with fewer than 90% valid replicates gets no
+    simultaneous band and is labeled underpowered. Its point estimate is kept.
+levels:
+  sex: [F, M]
+  age: ["18-49", "50-64", "65-79", "80+"]
+  race_ethnicity: [asian, black, hispanic_latino, unknown_other, white]
+pairwise:
+  sex: {contrast: F_minus_M}
+  # The parent report has no age reference contrast. 65-79 is the interior
+  # prespecified bin, frozen before this sensitivity is scored.
+  age: {reference: "65-79"}
+  race_ethnicity:
+    min_events_each_level: 11
+    direction: alphabetical_earlier_minus_later
+omnibus: range_of_level_estimates
+case_mix_standardization: not_recomputed

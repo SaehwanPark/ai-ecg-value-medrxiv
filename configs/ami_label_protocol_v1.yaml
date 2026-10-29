@@ -1,0 +1,26 @@
+# Index-encounter adjudicated AMI label protocol. Closed as not pursued under
+# decision D14 (2026-10-05); kept as the record of the feasibility design. The
+# coded-label endpoint is configs/ami_administrative_protocol_v1.yaml (D9).
+status: closed_not_pursued_D14
+require_clinical_protocol_approval: true
+endpoint: index-encounter AMI diagnostic association
+not_an_endpoint:
+  - incident 30-day MI prediction
+  - AMI inferred only from ECG machine text
+  - missing troponin treated as no AMI
+labels_if_approved:
+  - high_confidence_ami
+  - high_confidence_no_ami
+  - indeterminate
+candidate_icd:
+  icd10_ami: ["I21"]
+  icd10_subsequent_mi: ["I22"]
+  icd9_ami: ["410"]
+  excluded_examples: ["I24", "I25", "411"]
+troponin_itemids:
+  troponin_i: [51002, 52642]
+  troponin_t: [51003]
+label_timing:
+  post_ecg_information_allowed_for_label: true
+  post_ecg_information_allowed_for_predictors: false
+model_evaluation: not_pursued_D14

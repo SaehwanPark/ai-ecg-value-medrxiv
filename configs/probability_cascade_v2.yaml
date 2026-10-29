@@ -1,0 +1,50 @@
+version: 2
+research_mode: exploratory
+analysis_status: post_hoc_exploratory
+run_id: 20261009_ecg_only_v2_08
+output_root: artifacts/probability_cascade/v2
+
+study:
+  cohort: mimic
+  horizon_days: 30
+  primary_model_pair: ECG_only_A_vs_B
+  extra_tracks: []
+  previous_test_inspected: true
+
+inputs:
+  cohort_path: artifacts/cohort/primary_cohort.parquet
+  split_path: artifacts/cohort/split_assignments.csv
+  reps_dir: artifacts/reps
+  meta_a_path: artifacts/reps/ciis_features_meta.parquet
+  features_a_path: artifacts/reps/ciis_features.npy
+  meta_b_path: artifacts/reps/dbeta_embedding_meta.parquet
+  embeddings_b_path: artifacts/reps/dbeta_embeddings.npy
+  pair_validity_path: artifacts/reps/representation_pair_validity.parquet
+  models_dir: artifacts/probe/models
+
+routing:
+  method: numeric_A_risk_cutoff
+  reference_split: val
+  reference_target_b_fractions: [0.05, 0.10, 0.20, 0.40]
+  inequality: ">="
+  review_capacity_fraction: 0.05
+  comparator_policies: [A_only, B_all, legacy_top_u, matched_random]
+
+assessment:
+  split: test
+  seed: 42
+  bootstrap_replicates_first_pass: 200
+
+decision_analysis:
+  enabled: true
+  research_action: hypothetical_ECG_time_chart_review_reassessment
+  clinical_approval_claimed: false
+  thresholds: [0.01, 0.02, 0.03, 0.05, 0.075, 0.10, 0.15, 0.20]
+  show_calibration_caveat: true
+
+protection:
+  patient_level_split: true
+  require_horizon_and_key_alignment: true
+  private_patient_level_outputs: true
+  preserve_historical_artifacts: true
+  no_force_push: true

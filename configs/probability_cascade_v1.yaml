@@ -1,0 +1,81 @@
+# Draft only: this file records a candidate protocol, not an approval, frozen policy,
+# fitted threshold, calibration artifact, or authorization for empirical evaluation.
+status: draft_not_approved
+analysis_status: post_hoc_extension
+source_repo_commit: 64383a6a78db22c140bb638ae6cf754ead5e40f9
+intake_commit: e86e687186f22bbf657437e65eb52353c03a1daa
+clinical_decision_approval: pending
+research_lead_approval: pending
+data_use_approval: pending
+compute_budget_approval: pending
+locked_test_authorization: pending
+
+primary:
+  target_dataset: mimic
+  outcome: mortality_30d
+  outcome_horizon_days: 30
+  index_event: earliest_eligible_ecg_per_patient
+  index_time: ecg_acquisition_time
+  split_unit: subject_id
+  existing_split_reference: artifacts/cohort/split_assignments.csv
+  split_contract: patient_level_60_20_20_seed_42_documented_not_reverified
+  model_scope: ecg_only
+  stage_a: M_A_ECG
+  stage_b: M_B_ECG
+  stage_a_score_column: p_a_ecg
+  stage_b_score_column: p_b_ecg
+  stage_a_model_path: artifacts/probe/models/M_A_ECG.joblib
+  stage_b_model_path: artifacts/probe/models/M_B_ECG.joblib
+  stage_a_model_sha256: "69f74de9d65dfcfe99d6d0a00cb5d97e81ba3e109ce528d2b5b4525e441420e6"
+  stage_b_model_sha256: "0fbe37a81e4a36bb191ac0478dcd343caa88680191c939616c624f77cec8051a"
+  routing_rule: p_a_ecg_greater_than_or_equal_to_tau_r
+  reference_routing_fractions: [0.05, 0.10, 0.20, 0.40]
+  threshold_source: pending_authorized_non_test_reference_scores_only
+  threshold_values: pending_fit_after_approval
+  threshold_equality: inclusive
+  missing_score_behavior: explicit_unable_to_route_no_automatic_low_risk_fallback
+  existing_ecg_only_test_predictions_path: artifacts/probe/test_predictions_ecg_only.parquet
+  existing_ecg_only_test_predictions_sha256: "69fdbe998172d176c5eefdb06cd6a5fc5c9a92defe2304e7f382f85875df76d7"
+  existing_ecg_only_dev_val_scores: not_found
+  dev_val_score_action: score_generation_design_only_pending_authorization
+  final_score_rules:
+    - raw_selective_mixture_diagnostic_only_not_assumed_probability
+    - policy_specific_calibration_only_after_non_test_fit_and_audit
+  historic_review_capacities: [0.025, 0.05, 0.10]
+  clinical_action_thresholds: pending_named_clinician_approval
+  calibration_fit_partitions: pending_data_and_statistical_review
+  calibration_audit_partitions: not_independent_on_current_documented_splits
+  independent_confirmatory_set: not_identified
+  bootstrap:
+    n_replicates: 1000
+    seed: 20261009
+    unit: subject_id
+    policy_recalibration_in_replicates: false
+  claims: exploratory_only_until_independent_evaluation
+
+secondary:
+  mimic_context_adjusted:
+    status: not_authorized_as_primary
+    stage_a: M_A
+    stage_b: M_B
+    score_columns: [p_a, p_b]
+    dev_val_scores_path: artifacts/probe/dev_val_scores_context.parquet
+    dev_val_scores_sha256: "bc94ba088dcb646704a28c09ab8e17a152b609f01a0094d728d6ab874cb4e8d5"
+  code15_probability_dca:
+    status: blocked_horizon_and_calibration
+    existing_model_training_horizon_days: 30
+    existing_cascade_label_horizon_days: 365
+    allowed_descriptive_evaluation: pending_separate_permission
+
+artifacts:
+  private_root: artifacts/probability_cascade
+  public_aggregate_root: docs/probability_cascade
+  per_patient_files_gitignored: true
+
+reporting:
+  suppress_counts_below: 11
+  require_event_identity_recovery: true
+  require_missed_full_b_event_identities: true
+  require_realized_b_utilization: true
+  require_negative_findings: true
+  forbid_claims_of_prevented_deaths_or_unmeasured_cost_savings: true

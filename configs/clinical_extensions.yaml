@@ -1,0 +1,17 @@
+# Documented defaults for clinical extensions. The CLI flags are the executable
+# configuration; this file records the rules that must stay aligned with them.
+study:
+  canonical_cohort_unchanged: true
+  preserve_patient_splits: true
+  no_test_tuning: true
+  analysis_status: posthoc_frozen_extension
+clinical_setting:
+  interval_rule: "[intime,outtime)"
+  labels: [ICU, ED, inpatient_non_ICU, other_or_unlinked, ambiguous]
+  proximity_sensitivity_hours: [6, 24]
+  outpatient_inference: false
+  approval_gate: G1_approved_2026-10-05
+metrics:
+  confidence_level: 0.95
+  n_bootstraps: 1000
+  seed: 42

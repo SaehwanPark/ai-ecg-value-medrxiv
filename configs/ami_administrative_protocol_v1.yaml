@@ -1,0 +1,33 @@
+# Exploratory administrative endpoint. This is not adjudicated AMI.
+# F-AMI-Adjudicated stays blocked. Troponin is not an eligibility rule.
+status: exploratory-administrative
+endpoint: principal discharge diagnosis of acute myocardial infarction
+not_an_endpoint:
+  - clinically adjudicated AMI
+  - incident or future AMI
+  - AMI inferred from ECG machine text
+  - missing troponin treated as no AMI
+primary:
+  positive: principal ICD-10 I21 excluding type 2 I21.A1, or principal ICD-9 410 with episode digit 0, 1, or absent
+  negative: no I21, I22, or 410 on the linked hadm_id
+  excluded_ambiguous:
+    - secondary I21 or 410 without a qualifying principal code
+    - principal or any I22 without a qualifying principal acute code
+    - principal type 2 I21.A1
+    - principal ICD-9 410 with episode digit 2
+  troponin_required: false
+  timing: ED location at the index ECG, or index ECG in [hospital admittime, admittime + 24h)
+  ecg: preserved earliest index ECG; a different encounter ECG is not substituted
+sensitivity_any_position:
+  positive: any I21, including type 2, or any 410
+  excluded: I22 without I21 or 410
+  negative: no I21, I22, or 410
+  timing: linked ED, ICU, or inpatient index ECG; the 24-hour window is not applied
+sensitivity_troponin_tested:
+  population: primary eligible encounters that also have a troponin row on the hadm_id
+  troponin_is_a_predictor: false
+models:
+  primary: [A_only, B_only]
+  context_sensitivity: [C0_plus_A, C0_plus_B]
+  learner: ridge logistic, development standardization, validation log-loss
+claim_language: prediction of AMI-associated discharge coding

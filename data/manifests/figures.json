@@ -1,0 +1,102 @@
+{
+  "figures": [
+    {
+      "display": "Figure 1",
+      "inputs": [
+        {
+          "path": "data/artifacts/cohort/cohort_counts.json",
+          "sha256": "4b6e3c0ee9181ea87855d841235e84fef55d2f6460fffdefe6a4425583b15015"
+        }
+      ],
+      "outputs": [
+        "outputs/figures/figure1_cohort_evidence_flow.png",
+        "outputs/figures/figure1_cohort_evidence_flow.svg"
+      ],
+      "title": "Study population and analysis design"
+    },
+    {
+      "display": "Figure 2",
+      "inputs": [
+        {
+          "path": "data/tables/table2_overall_performance.csv",
+          "sha256": "b90cc8ff0b298f94da7084a0ff84d4d314035e4f4aea002d8770d2a3187eac0b"
+        },
+        {
+          "path": "data/tables/table3_incremental_value_and_controls.csv",
+          "sha256": "8632b83edb3e1bbb1487475e4854dfba1658caf1e17e7cc810cb5f9c9fcb2efc"
+        },
+        {
+          "path": "data/tables/table6_limitation_mitigation.csv",
+          "sha256": "da2345f58e16f63b020a24b0fc65249316c96f7dc5688e3510cbd40baccdaf42"
+        },
+        {
+          "path": "data/clinical_tables/attenuation_comparison.csv",
+          "sha256": "bc8ce7b5967381bcdeca19c3da788632a9eed628355a6fa886865d321136d0df"
+        }
+      ],
+      "outputs": [
+        "outputs/figures/figure2_discrimination_attenuation.png",
+        "outputs/figures/figure2_discrimination_attenuation.svg"
+      ],
+      "title": "Discrimination across available ECG and clinical information"
+    },
+    {
+      "display": "Figure 3",
+      "inputs": [
+        {
+          "path": "data/artifacts/analysis/scientific_analysis_results.json",
+          "sha256": "ecdcbca5a615e05adc94e182757a410148b1b94775ab6284c4d2df8be8e9bb62"
+        },
+        {
+          "path": "data/tables/supp_risk_strata.csv",
+          "sha256": "628a3ec708c93253e4c6f1e1c9a979058008d567a6db7414058b6de842b4ca91"
+        }
+      ],
+      "outputs": [
+        "outputs/figures/figure3_review_capacity_5_10.png",
+        "outputs/figures/figure3_review_capacity_5_10.svg"
+      ],
+      "title": "Patient prioritization at the same review workload"
+    },
+    {
+      "display": "Figure 4",
+      "inputs": [
+        {
+          "path": "data/tables/table4_subgroup_gain.csv",
+          "sha256": "989e80c20d3a81dd4d0b17e44aa66844507771824dce18ab385192ae73142c2b"
+        },
+        {
+          "path": "data/tables/table3_incremental_value_and_controls.csv",
+          "sha256": "8632b83edb3e1bbb1487475e4854dfba1658caf1e17e7cc810cb5f9c9fcb2efc"
+        }
+      ],
+      "outputs": [
+        "outputs/figures/figure4_subgroup_heterogeneity.png",
+        "outputs/figures/figure4_subgroup_heterogeneity.svg"
+      ],
+      "title": "Variation in the feature advantage across patient groups"
+    },
+    {
+      "display": "Figure 5",
+      "inputs": [
+        {
+          "path": "data/artifacts/probe/label_efficiency/label_efficiency_long.csv",
+          "sha256": "f8e9a0d497dfea61450f12bb31dd78324c4c9203db72e821371a212e268135c2"
+        },
+        {
+          "path": "data/tables/supp_label_efficiency.csv",
+          "sha256": "2b1b80b1dd7fa24fc4fcedf982f8e048c5adf652d7c24e97d3ef1a57c0320c77"
+        },
+        {
+          "path": "data/tables/supp_random_encoder_control.csv",
+          "sha256": "b6fbe319086a67e4e5c0701f9d35570f704efb90aa3ce15a52406cec5f457c10"
+        }
+      ],
+      "outputs": [
+        "outputs/figures/figure5_pretraining_label_efficiency.png",
+        "outputs/figures/figure5_pretraining_label_efficiency.svg"
+      ],
+      "title": "Value of previous ECG training with fewer outcome labels"
+    }
+  ]
+}
