@@ -1,5 +1,27 @@
 # Replicating the analysis
 
+## Aggregate replay (no datasets required)
+
+Every number displayed in the v3.1.0 manuscript's new or changed displays is
+reproducible from this release alone:
+
+```bash
+uv sync
+uv run python scripts/check_values.py             # reconcile Table 5 (all four rows), S8, LM1B ledger
+uv run python scripts/build_figure3_medrxiv_v2.py # four-panel Figure 3 from the committed receipts
+uv run python scripts/build_all.py                # tables + all figures (incl. the v3.1.0 panel) + checks
+```
+
+`build_figure3_medrxiv_v2.py` first verifies every input against
+[`data/manifests/figure3_source_manifest.json`](data/manifests/figure3_source_manifest.json)
+(sha256, fail-closed) and re-derives every displayed quantity through the
+renderer's validator before drawing. Aggregate replay does not require
+credentialed datasets or any private artifact; the raw-data pipeline below
+remains the only way to reproduce the analysis from source data.
+
+## Raw-data pipeline
+
+
 The package ships the same `ecg_rep` pipeline code that produced the
 manuscript's results (pinned seeds, frozen extraction, prespecified
 configuration). Given the [required dataset layout](DATA_LAYOUT.md), the

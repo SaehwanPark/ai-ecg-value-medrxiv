@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build tables and figures, then run the headline-value checks."""
+"""Build tables and figures (including the v3.1.0 four-panel Figure 3), then run the value checks."""
 from __future__ import annotations
 
 import subprocess
@@ -16,6 +16,7 @@ def _run(script: str) -> None:
 def main() -> int:
   _run("build_tables.py")
   _run("build_figures.py")
+  _run("build_figure3_medrxiv_v2.py")
   _run("check_values.py")
   return 0
 

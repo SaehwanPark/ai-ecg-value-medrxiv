@@ -24,6 +24,28 @@ for the complete inventory.
 | Table 3 | `table3_incremental_value_and_controls.csv` | Paired contrasts, add-on increments, controls |
 | Table 4 | `table4_subgroup_gain.csv` | Subgroup gains underlying Figure 4 (the manuscript's Table 4 also draws on the clinical-extension CSV) |
 
+## v3.1.0 revision displays (medRxiv revision v2)
+
+The v3.1.0 manuscript splits the preprint-era Table 4 into Table 4
+(discrimination) and Table 5 (event capture), moves the PPV/sensitivity
+companions to Supplementary Table S8, and adds the fourth Figure 3 panel.
+Sources:
+
+| Display | Source inputs | Notes |
+|---|---|---|
+| Table 5 rows 1–2 (ECG-only; with `C_basic`) | `data/receipts/primary_capacity_operating_points.json` | Prespecified ECG-only row; post hoc context-adjusted row |
+| Table 5 row 3 (separately refitted expanded report) | `data/receipts/lm1b_paired_lists_receipt.json` + `data/tables/lm1b_paired_lists.csv` | Post hoc; paired intervals + flagged-patient/captured-death identity |
+| Table 5 row 4 (broad context, `C_broad`) | `data/tables/table6_limitation_mitigation.csv`, rows `L93_capacity_0.05*` and `L93_capacity_0.1*` | Post hoc; **not** sourced from the morphology risk-strata file |
+| Supplementary Table S8 (rows 1–6) | both receipts (PPV/sensitivity fields) | Per-list descriptive shares; the `C_broad` row is intentionally absent (its ledger carries capture counts only) |
+| Figure 3 panels a–b | `data/receipts/primary_capacity_operating_points.json` | Unchanged values from v3.0.14 |
+| Figure 3 panel c | `data/tables/supp_risk_strata.csv` (all row) | Morphology-vs-AI 5% death exchange (126/136/95) |
+| Figure 3 panel d | `data/receipts/lm1b_paired_lists_receipt.json` | Post hoc refitted report exchange (172/90/89 deaths) with the 654/1,272 flagged-patient annotation |
+
+Rebuild: `uv run python scripts/build_figure3_medrxiv_v2.py` (verifies
+`data/manifests/figure3_source_manifest.json` fail-closed, then draws with
+zero-violation layout QA). Built images are semantic replays (values, panels,
+labels, layout), not byte-identical copies across environments.
+
 ## Supplementary inputs
 
 All committed supplementary table CSVs are copied under `data/tables/`. Their

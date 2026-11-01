@@ -1,7 +1,9 @@
 {
-  "release_date": "2026-10-28",
+  "release_date": "2026-11-01",
   "repository": "https://github.com/SaehwanPark/ai-ecg-value-medrxiv",
-  "scope": "analysis pipeline code plus aggregate-only reproduction of main tables and figures",
-  "tag": "v3.0.14",
-  "version": "v3.0.14"
+  "scope": "analysis pipeline code plus aggregate-only reproduction of the main tables and figures, synchronized to internal manuscript v3.1.0 \u2014 the source of the planned medRxiv revision v2 under the same DOI (10.64898/2026.10.28.26366716); predecessor release v3.0.14 remains accessible and unchanged",
+  "tag": "v3.1.0",
+  "version": "v3.1.0",
+  "manuscript_version": "v3.1.0",
+  "medrxiv_revision": 2
 }

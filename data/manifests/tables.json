@@ -53,7 +53,8 @@
     "supp_subgroup_pairwise_adjusted.csv",
     "supp_subgroup_simultaneous.csv",
     "table5_computational_cost.csv",
-    "table6_limitation_mitigation.csv"
+    "table6_limitation_mitigation.csv",
+    "lm1b_paired_lists.csv"
   ],
   "tables": [
     {
@@ -344,5 +345,10 @@
       "sha256": "da2345f58e16f63b020a24b0fc65249316c96f7dc5688e3510cbd40baccdaf42",
       "title": null
     }
-  ]
+  ],
+  "v3_1_0_additions": {
+    "lm1b_paired_lists.csv": "registered aggregate-only companion ledger for the post hoc paired expanded-report review-list analysis",
+    "data/receipts/lm1b_paired_lists_receipt.json": "sanitized LM1B aggregate receipt (counts, intervals, overlaps; no patient-level fields)",
+    "data/receipts/primary_capacity_operating_points.json": "sanitized primary/context-adjusted capacity receipt (5%/10% operating points)"
+  }
 }

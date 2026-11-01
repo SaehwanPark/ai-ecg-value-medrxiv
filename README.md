@@ -1,9 +1,28 @@
 # AI-ECG incremental value — replication package
 
-Code and aggregate results for the medRxiv preprint **"Evaluating the
-Incremental Value of AI-Derived ECG Features Beyond Automated ECG Reports and
-Clinical Data for 30-Day Mortality: A MIMIC-IV Cohort Study"** — release
-`v3.0.14` (2026-10-28).
+Code and aggregate results for **"Evaluating the Incremental Value of
+AI-Derived ECG Features Beyond Automated ECG Reports and Clinical Data for
+30-Day Mortality: A MIMIC-IV Cohort Study"** — release `v3.1.0` (2026-11-01),
+synchronized to internal manuscript **v3.1.0**, the source of the planned
+medRxiv **revision v2** under the same DOI as the posted v1
+(10.64898/2026.10.28.26366716). The predecessor release `v3.0.14` (the posted
+v1's replication package) remains accessible and unchanged.
+
+**What v3.1.0 adds** (all aggregate-only; analysis status unchanged — the new
+comparison is labelled post hoc in the manuscript):
+
+- the registered paired expanded-report review-list analysis ("LM1B"):
+  capture counts, paired bootstrap intervals, flagged-patient overlap and
+  captured-death identity at the 5% and 10% review capacities
+  ([`data/tables/lm1b_paired_lists.csv`](data/tables/lm1b_paired_lists.csv),
+  [`data/receipts/`](data/receipts/));
+- the four-panel fixed-capacity Figure 3 of the revision, including the
+  refitted expanded-report list-identity panel, replayable from this release
+  alone (`scripts/build_figure3_medrxiv_v2.py`);
+- value checks covering **all four** Table 5 comparisons (including the
+  broad-context row, sourced from the frozen limitation-mitigation ledger),
+  the Supplementary Table S8 operating points, and the LM1B ledger
+  (`scripts/check_values.py`).
 
 ## What is inside
 

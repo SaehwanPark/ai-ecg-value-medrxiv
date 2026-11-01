@@ -26,6 +26,14 @@ status-coded contrast panels where it is deliberately used (Figure 2c, Figure
    publication-width canvas so the saved physical width matches ``PUB_WIDTH``
 and the printed point sizes are the nominal ones.
 
+Round/v3.1.0 addition (medRxiv revision v2, 2026-11-01): the fixed-capacity Figure 3
+gains a fourth panel — the separately refitted expanded-report-versus-AI list-identity
+exchange — rendered by ``figure3_review_capacity_5_10_medrxiv_v2`` from the tracked
+aggregate-only receipts (``data/receipts/``) through a fail-closed validator that
+re-derives every displayed quantity and raises on any mismatch; no fitting, no
+resampling, no patient-level input. The shared drawing core keeps the historical
+figures byte-compatible.
+
 Lineup: Figure 1 cohort/evidence flow, Figure 2 discrimination and
 comparator attenuation, Figure 3 fixed-capacity prioritization (5% and 10%),
 Figure 4 subgroup heterogeneity, Figure 5 pretraining and label efficiency.
@@ -958,6 +966,245 @@ def figure3_review_capacity_5_10(figures_dir: Path, tables_dir: Path, artifacts_
   fig.subplots_adjust(left=0.068, right=0.99, top=0.90, bottom=0.15, wspace=0.32)
   _audit_figure_layout(fig, "figure3_review_capacity_5_10")
   return _save(fig, figures_dir, "figure3_review_capacity_5_10")
+
+
+def _draw_figure3_capacity_panels(
+  figures_dir: Path,
+  groups: list[dict[str, Any]],
+  panel_c: dict[str, int],
+  panel_d: dict[str, int],
+  stem: str,
+  report_overlap_note: str | None = None,
+) -> list[str]:
+  """Shared four-panel fixed-capacity drawing (v4 and medRxiv-v2 lines).
+
+  ``groups`` rows carry normalized keys (label, a, b, delta, lo, hi); panels
+  c/d carry shared/b_only/a_only captured-death counts. The matplotlib call
+  sequence is identical for every caller, so a line's committed render changes
+  only when its own inputs change. The only optional difference is panel d's
+  flagged-patient-overlap note (medRxiv v2, round-2 audit R2-04), which raises
+  panel d's headroom so the note cannot collide with the bar labels: the bars
+  count captured deaths, and the note states the separate all-patient list
+  overlap so the two denominators are never conflated.
+  """
+  fig, axes = plt.subplots(2, 2, figsize=(PUB_WIDTH, 6.1))
+  ax_a, ax_b, ax_c, ax_d = axes[0, 0], axes[0, 1], axes[1, 0], axes[1, 1]
+
+  xs = np.arange(len(groups))
+  width = 0.34
+  a_counts = [int(g["a"]) for g in groups]
+  b_counts = [int(g["b"]) for g in groups]
+  ax_a.bar(xs - width / 2, a_counts, width, color=COLOR_MORPH, label=f"Morphology measurements ({SYM_MORPH})")
+  ax_a.bar(xs + width / 2, b_counts, width, color=COLOR_DBETA, label=f"AI-derived features ({SYM_AI})")
+  for x, g in zip(xs, groups):
+    ax_a.annotate(f"{a_counts[x]}", (x - width / 2, a_counts[x]), textcoords="offset points", xytext=(0, 2), ha="center", fontsize=6.5)
+    ax_a.annotate(f"{b_counts[x]}", (x + width / 2, 0), textcoords="offset points", xytext=(0, 3), ha="center", va="bottom", fontsize=6.5, color="white")
+  ax_a.set_xticks(xs, [g["label"].replace("%, ", "%\n") for g in groups], fontsize=6.8)
+  ax_a.set_ylabel("Deaths among flagged patients")
+  ax_a.set_ylim(top=max(b_counts) * 1.14)
+  ax_a.legend(fontsize=6.5, loc="upper left")
+  _panel_letter(ax_a, "a  Deaths captured")
+
+  for i, g in enumerate(groups):
+    d, lo, hi = float(g["delta"]), float(g["lo"]), float(g["hi"])
+    ax_b.errorbar(d, i, xerr=[[d - lo], [hi - d]], fmt="o", color=COLOR_DBETA, capsize=2, ms=4.0)
+  ax_b.axvline(0, color="black", lw=0.7)
+  ax_b.set_yticks(range(len(groups)), [g["label"].replace("%, ", "%\n") for g in groups], fontsize=6.8)
+  ax_b.invert_yaxis()
+  ax_b.set_xlim(-12, 122)
+  ax_b.set_xlabel(f"Additional deaths identified, {CON_AI_MORPH} (95% CI)")
+  _panel_letter(ax_b, f"b  Paired Δ, {CON_AI_MORPH}")
+
+  bars_c = [panel_c["shared"], panel_c["b_only"], panel_c["a_only"]]
+  labels_c = ["Both lists", "AI list\nonly", "Morphology\nlist only"]
+  ax_c.bar([0, 1, 2], bars_c, width=0.62, color=["#9aa5ad", COLOR_DBETA, COLOR_MORPH])
+  for x, v in zip([0, 1, 2], bars_c):
+    ax_c.annotate(str(v), (x, v), textcoords="offset points", xytext=(0, 3), ha="center", fontsize=7.0)
+  ax_c.set_xticks([0, 1, 2], labels_c, fontsize=6.5)
+  ax_c.set_ylim(top=max(bars_c) * 1.18)
+  ax_c.set_ylabel(f"Deaths (5% lists, with {SYM_BASIC})")
+  _panel_letter(ax_c, f"c  5% {SYM_BASIC} identity: morphology vs AI [post hoc]")
+
+  bars_d = [panel_d["shared"], panel_d["b_only"], panel_d["a_only"]]
+  labels_d = ["Both lists", "AI list\nonly", "Report\nlist only"]
+  ax_d.bar([0, 1, 2], bars_d, width=0.62, color=["#9aa5ad", COLOR_DBETA, "#9a6425"])
+  for x, v in zip([0, 1, 2], bars_d):
+    ax_d.annotate(str(v), (x, v), textcoords="offset points", xytext=(0, 3), ha="center", fontsize=7.0)
+  ax_d.set_xticks([0, 1, 2], labels_d, fontsize=6.5)
+  ax_d.set_ylim(top=max(bars_d) * (1.32 if report_overlap_note else 1.18))
+  ax_d.set_ylabel(f"Deaths (5% lists, with {SYM_BASIC})")
+  _panel_letter(ax_d, f"d  5% {SYM_BASIC} identity: report vs AI [post hoc]")
+  if report_overlap_note:
+    ax_d.text(0.03, 0.985, report_overlap_note, transform=ax_d.transAxes,
+              ha="left", va="top", fontsize=6.5, linespacing=1.3)
+
+  fig.subplots_adjust(left=0.075, right=0.99, top=0.955, bottom=0.07, wspace=0.30, hspace=0.34)
+  _audit_figure_layout(fig, stem)
+  return _save(fig, figures_dir, stem)
+
+
+def figure3_review_capacity_5_10_v4(
+  figures_dir: Path, tables_dir: Path, artifacts_root: Path, receipt_path: Path, *, stem: str = "figure3_review_capacity_5_10_v4"
+) -> list[str]:
+  """EHJ-DH v4 Figure 3 (round-02 audit P1-02): fixed-capacity prioritization
+  with the verified report-list identity panel.
+
+  Panels a–c reuse the frozen submission figure's committed data sources and
+  visual contract unchanged — the v3.0.14 exhibit files stay untouched. Panel d
+  adds the authorised refitted expanded-report list-identity exchange read from
+  the tracked aggregate-only receipt
+  (``data/receipts/lm1b_paired_lists_receipt.json``); no fitting
+  and no resampling. The two identity panels are deliberately separated and
+  labelled (morphology exchange in panel c, report exchange in panel d) with
+  panel-specific bar labels, because they are different comparisons with
+  different flagged-patient denominators and must never share exchange labels.
+  Both identity panels are visibly marked post hoc. The ``stem`` keyword lets a
+  sibling manuscript line render the same panels under its own file name
+  without touching the v4-owned artifacts; the panel content and QA contract
+  are identical, and the drawing itself is shared with the medRxiv-v2
+  tracked-input renderer (round-2 audit R2-02).
+  """
+  analyses = _load(artifacts_root / "analysis" / "scientific_analysis_results.json")["analyses"]
+  strata = pl.read_csv(tables_dir / "supp_risk_strata.csv")
+  receipt = _load(receipt_path)
+  identity_report = receipt["capacities"]["0.05"]["identity"]
+
+  def cap_rows(key: str) -> dict[float, dict[str, Any]]:
+    return {round(float(r["capacity_fraction"]), 4): r for r in analyses[key]}
+
+  ecg = cap_rows("rq5_capacity_comparison")
+  ctx = cap_rows("rq5_capacity_comparison_context")
+  groups: list[dict[str, Any]] = [
+    {"label": "5%, ECG-only", "a": int(ecg[0.05]["capacity_a"]["n_events_captured"]),
+     "b": int(ecg[0.05]["capacity_b"]["n_events_captured"]),
+     "delta": float(ecg[0.05]["delta_events_captured"]),
+     "lo": float(ecg[0.05]["delta_events_ci_lower"]), "hi": float(ecg[0.05]["delta_events_ci_upper"])},
+    {"label": "10%, ECG-only", "a": int(ecg[0.1]["capacity_a"]["n_events_captured"]),
+     "b": int(ecg[0.1]["capacity_b"]["n_events_captured"]),
+     "delta": float(ecg[0.1]["delta_events_captured"]),
+     "lo": float(ecg[0.1]["delta_events_ci_lower"]), "hi": float(ecg[0.1]["delta_events_ci_upper"])},
+    {"label": f"5%, with {SYM_BASIC}", "a": int(ctx[0.05]["capacity_a"]["n_events_captured"]),
+     "b": int(ctx[0.05]["capacity_b"]["n_events_captured"]),
+     "delta": float(ctx[0.05]["delta_events_captured"]),
+     "lo": float(ctx[0.05]["delta_events_ci_lower"]), "hi": float(ctx[0.05]["delta_events_ci_upper"])},
+    {"label": f"10%, with {SYM_BASIC}", "a": int(ctx[0.1]["capacity_a"]["n_events_captured"]),
+     "b": int(ctx[0.1]["capacity_b"]["n_events_captured"]),
+     "delta": float(ctx[0.1]["delta_events_captured"]),
+     "lo": float(ctx[0.1]["delta_events_ci_lower"]), "hi": float(ctx[0.1]["delta_events_ci_upper"])},
+  ]
+  all_row = strata.filter(pl.col("stratum") == "all").row(0, named=True)
+  panel_c = {
+    "shared": int(all_row["capacity_events_captured_by_b"]) - int(all_row["capacity_events_b_only"]),
+    "b_only": int(all_row["capacity_events_b_only"]),
+    "a_only": int(all_row["capacity_events_a_only"]),
+  }
+  panel_d = {
+    "shared": int(identity_report["captured_by_both"]),
+    "b_only": int(identity_report["captured_by_b_only"]),
+    "a_only": int(identity_report["captured_by_a2_only"]),
+  }
+  return _draw_figure3_capacity_panels(figures_dir, groups, panel_c, panel_d, stem)
+
+
+def _validated_capacity_groups_from_receipts(
+  tables_dir: Path, receipts_dir: Path
+) -> tuple[list[dict[str, Any]], dict[str, int], dict[str, int], str]:
+  """Build Figure 3's four panels from tracked aggregate receipts, fail-closed.
+
+  Round-2 audit R2-02: the medRxiv-v2 publication display must be reproducible
+  on a clean checkout, so every input is a tracked, nonidentifying aggregate
+  file and every displayed quantity is re-derived and cross-checked here
+  (flagged counts, capture deltas, interval containment, PPV/sensitivity
+  arithmetic, cross-receipt population-hash identity, and the LM1B
+  captured-death/flagged-patient identities). Any mismatch raises instead of
+  drawing. No patient-level input is read.
+  """
+  primary = _load(receipts_dir / "primary_capacity_operating_points.json")
+  lm1b = _load(receipts_dir / "lm1b_paired_lists_receipt.json")
+  strata = pl.read_csv(tables_dir / "supp_risk_strata.csv")
+
+  n_test = int(primary["population"]["n_test"])
+  n_events = int(primary["population"]["n_events"])
+  if (n_test, n_events) != (25_430, 924):
+    raise ValueError(f"primary receipt population {n_test}/{n_events} is not the locked test 25,430/924")
+  if lm1b["population"]["test_population_sha256"] != primary["population"]["test_population_sha256"]:
+    raise ValueError("LM1B and primary capacity receipts describe different locked-test populations")
+
+  groups: list[dict[str, Any]] = []
+  for family, suffix in (
+    ("ecg_only", ", ECG-only"),
+    ("with_c_basic", ", with " + SYM_BASIC),
+  ):
+    for fraction_key in ("0.05", "0.1"):
+      row = primary["capacities"][family][fraction_key]
+      fraction = float(row["capacity_fraction"])
+      flagged = int(row["n_flagged_per_list"])
+      expected_flagged = max(1, round(n_test * fraction))
+      if flagged != expected_flagged:
+        raise ValueError(f"{family}@{fraction_key}: flagged {flagged} != round(N*q) = {expected_flagged}")
+      a, b = int(row["a_events_captured"]), int(row["b_events_captured"])
+      delta = float(row["delta_events_captured"])
+      lo, hi = float(row["delta_events_ci"][0]), float(row["delta_events_ci"][1])
+      if abs(delta - (b - a)) > 1e-9:
+        raise ValueError(f"{family}@{fraction_key}: delta {delta} != captured difference {b - a}")
+      if not (lo - 1e-9 <= delta <= hi + 1e-9):
+        raise ValueError(f"{family}@{fraction_key}: delta {delta} outside its own CI [{lo}, {hi}]")
+      for side, captured, share in (("a", a, float(row["a_ppv"])), ("b", b, float(row["b_ppv"]))):
+        if abs(share - captured / flagged) > 1e-9:
+          raise ValueError(f"{family}@{fraction_key}: {side} PPV {share} != {captured}/{flagged}")
+      for side, captured, coverage in (("a", a, float(row["a_sensitivity"])), ("b", b, float(row["b_sensitivity"]))):
+        if abs(coverage - captured / n_events) > 1e-9:
+          raise ValueError(f"{family}@{fraction_key}: {side} sensitivity {coverage} != {captured}/{n_events}")
+      label = ("5%" if fraction_key == "0.05" else "10%") + suffix
+      groups.append({"label": label, "a": a, "b": b, "delta": delta, "lo": lo, "hi": hi})
+
+  all_row = strata.filter(pl.col("stratum") == "all").row(0, named=True)
+  captured_by_b = int(all_row["capacity_events_captured_by_b"])
+  captured_by_a = int(all_row["capacity_events_captured_by_a"])
+  b_only = int(all_row["capacity_events_b_only"])
+  a_only = int(all_row["capacity_events_a_only"])
+  shared = captured_by_b - b_only
+  if captured_by_a - a_only != shared:
+    raise ValueError(f"strata all-row exchange inconsistent: {shared} vs {captured_by_a - a_only} shared deaths")
+  if int(all_row["capacity_flagged_by_a"]) != int(all_row["capacity_flagged_by_b"]):
+    raise ValueError("strata all-row flagged-patient counts differ between the two lists")
+  ctx05 = next(g for g in groups if g["label"].startswith("5%, with "))
+  if (ctx05["a"], ctx05["b"]) != (captured_by_a, captured_by_b):
+    raise ValueError("with-C_basic 5% receipt row disagrees with the strata all-row capture counts")
+  panel_c = {"shared": shared, "b_only": b_only, "a_only": a_only}
+
+  cap05 = lm1b["capacities"]["0.05"]
+  identity = cap05["identity"]
+  both = int(identity["captured_by_both"])
+  d_b_only = int(identity["captured_by_b_only"])
+  d_a_only = int(identity["captured_by_a2_only"])
+  if both + d_b_only != int(cap05["b_events_captured"]) or both + d_a_only != int(cap05["a2_events_captured"]):
+    raise ValueError("LM1B 5% identity counts do not sum to the receipt's captured deaths")
+  intersection = int(identity["flagged_list_intersection"])
+  flagged = int(cap05["n_flagged_per_list"])
+  if int(identity["flagged_list_union"]) != 2 * flagged - intersection:
+    raise ValueError("LM1B 5% flagged-list union does not equal 2*flagged − intersection")
+  panel_d = {"shared": both, "b_only": d_b_only, "a_only": d_a_only}
+  note = (f"{intersection:,}/{flagged:,} flagged patients shared ({intersection / flagged * 100:.1f}%);\n"
+          "bars count captured deaths")
+  return groups, panel_c, panel_d, note
+
+
+def figure3_review_capacity_5_10_medrxiv_v2(
+  figures_dir: Path, tables_dir: Path, receipts_dir: Path, *, stem: str = "figure3_review_capacity_5_10_medrxiv_v2"
+) -> list[str]:
+  """medRxiv-v2 Figure 3 (round-2 audit R2-02): clean-checkout reproduction.
+
+  Renders the same four fixed-capacity panels as the v4 variant from TRACKED
+  aggregate-only inputs only — ``primary_capacity_operating_points.json``
+  (panels a–b), ``supp_risk_strata.csv`` (panel c) and the LM1B receipt
+  (panel d) — with the fail-closed arithmetic validation of
+  ``_validated_capacity_groups_from_receipts``. No ``artifacts/`` dependency,
+  no fitting, no resampling, no patient-level input; panel d carries the
+  flagged-patient-overlap note (round-2 audit R2-04).
+  """
+  groups, panel_c, panel_d, note = _validated_capacity_groups_from_receipts(tables_dir, receipts_dir)
+  return _draw_figure3_capacity_panels(figures_dir, groups, panel_c, panel_d, stem, report_overlap_note=note)
 
 
 def figure4_subgroup_heterogeneity(figures_dir: Path, tables_dir: Path) -> list[str]:

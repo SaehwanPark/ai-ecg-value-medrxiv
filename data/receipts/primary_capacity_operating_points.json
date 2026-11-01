@@ -1,0 +1,85 @@
+{
+  "schema_version": "primary_capacity_operating_points_v1",
+  "description": "Nonidentifying aggregate receipt for the primary and context-adjusted fixed-capacity review-list analyses (prespecified ECG-only comparison and its post hoc C_basic companion) at the 5% and 10% capacities displayed in main Table 5 and Supplementary Table S8. No subject_id, study_id, prediction, or outcome row is present.",
+  "analysis_origin": {
+    "analyses": [
+      "rq5_capacity_comparison",
+      "rq5_capacity_comparison_context"
+    ],
+    "status": "frozen stored aggregates; the displayed values are identical to the published preprint v3.0.14 exhibits and this release",
+    "uncertainty": "95% outcome-stratified paired patient bootstrap of fixed test predictions (1,000 resamples, seed 42); crossing zero is not equivalence"
+  },
+  "population": {
+    "n_test": 25430,
+    "n_events": 924,
+    "test_population_sha256": "44c7d68841bfdc423ba9f9d2bc5cf12d4621d9c782b25ed6df2e5580560b3475",
+    "hash_definition": "sha256 over lexically sorted '<subject_id>,<study_id>' lines joined by newline (UTF-8)",
+    "cross_reference": "The primary paired-evaluable locked test coincides with the A''-valid surface verified in docs/limitation_mitigation/lm1_reference_aggregates.json (zero missing machine reports in every split)."
+  },
+  "capacities": {
+    "ecg_only": {
+      "0.05": {
+        "capacity_fraction": 0.05,
+        "n_flagged_per_list": 1272,
+        "a_events_captured": 163,
+        "b_events_captured": 236,
+        "delta_events_captured": 73,
+        "delta_events_ci": [
+          43.0,
+          96.02499999999998
+        ],
+        "a_ppv": 0.1281446540880503,
+        "b_ppv": 0.18553459119496854,
+        "a_sensitivity": 0.1764069264069264,
+        "b_sensitivity": 0.2554112554112554
+      },
+      "0.1": {
+        "capacity_fraction": 0.1,
+        "n_flagged_per_list": 2543,
+        "a_events_captured": 311,
+        "b_events_captured": 389,
+        "delta_events_captured": 78,
+        "delta_events_ci": [
+          46.975,
+          110.0
+        ],
+        "a_ppv": 0.12229650019661817,
+        "b_ppv": 0.15296893432953204,
+        "a_sensitivity": 0.3365800865800866,
+        "b_sensitivity": 0.420995670995671
+      }
+    },
+    "with_c_basic": {
+      "0.05": {
+        "capacity_fraction": 0.05,
+        "n_flagged_per_list": 1272,
+        "a_events_captured": 221,
+        "b_events_captured": 262,
+        "delta_events_captured": 41,
+        "delta_events_ci": [
+          10.975000000000001,
+          67.0
+        ],
+        "a_ppv": 0.17374213836477986,
+        "b_ppv": 0.2059748427672956,
+        "a_sensitivity": 0.23917748917748918,
+        "b_sensitivity": 0.28354978354978355
+      },
+      "0.1": {
+        "capacity_fraction": 0.1,
+        "n_flagged_per_list": 2543,
+        "a_events_captured": 364,
+        "b_events_captured": 422,
+        "delta_events_captured": 58,
+        "delta_events_ci": [
+          25.0,
+          90.0
+        ],
+        "a_ppv": 0.14313802595359812,
+        "b_ppv": 0.16594573338576485,
+        "a_sensitivity": 0.3939393939393939,
+        "b_sensitivity": 0.45670995670995673
+      }
+    }
+  }
+}
